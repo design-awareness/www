@@ -16,7 +16,7 @@
 
 import React, { Component } from "react";
 import styles from "./App.module.css";
-import MyComponent from "../components/MyComponent";
+import Editor from "../components/DBEditor/Editor";
 
 class App extends Component {
   constructor(props) {
@@ -27,8 +27,7 @@ class App extends Component {
   render() {
     return (
       <div className={styles.root}>
-        Hello!
-        <MyComponent />
+        <Editor />
       </div>
     );
   }

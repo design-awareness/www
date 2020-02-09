@@ -4,6 +4,12 @@ import './styles/index.css';
 import App from './views/App';
 import * as serviceWorker from './serviceWorker';
 
+// just load models for now
+import * as model from './data/models';
+window.M = {
+  ...model
+}
+
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
