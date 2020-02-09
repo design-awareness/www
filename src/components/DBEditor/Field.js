@@ -123,6 +123,7 @@ class Field extends React.Component {
       } else {
         input = (
           <input
+            className={styles.ref}
             type="text"
             value={(this.props.value ? this.props.value.id : "") || ""}
             onChange={evt => {

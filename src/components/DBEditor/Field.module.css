@@ -40,3 +40,9 @@
   display: flex;
   align-items: center;
 }
+
+.ref {
+  background-color: lightblue;
+  border-width: 1px;
+  border-style: solid;
+}
