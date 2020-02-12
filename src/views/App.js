@@ -15,6 +15,14 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import React, { Component } from "react";
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  Link,
+  useParams
+} from "react-router-dom";
 import styles from "./App.module.css";
 import Editor from "../components/DBEditor/Editor";
 
@@ -25,10 +33,58 @@ class App extends Component {
   }
 
   render() {
-    if (~window.location.hash.indexOf("dbeditor=true")) {
-      return <Editor />;
-    }
-    return <div className={styles.root}></div>;
+    return (
+      <div className={styles.root}>
+        <Router hashType="hashbang">
+          <Switch>
+            <Route exact path="/dev/dbeditor/">
+              <Editor />
+            </Route>
+            <Route path="/projects/">
+              <Link to="/projects/">Projects</Link>
+              {" > "}
+              <Switch>
+                <Route exact path="/projects/home/">
+                  My projects overview
+                  <div>
+                    <Link to="/projects/past/">past projects</Link>
+                  </div>
+                  <div>
+                    <Link to="/projects/create/">new project</Link>
+                  </div>
+                </Route>
+                <Route exact path="/projects/past/">
+                  Past projects
+                </Route>
+                <Route exact path="/projects/create/">
+                  New project
+                </Route>
+                <Route
+                  exact
+                  path="/projects/:id/"
+                  component={() => {
+                    return <div>View project {useParams().id}</div>;
+                  }}
+                ></Route>
+                <Route>
+                  <Redirect to="/projects/home/" />
+                </Route>
+              </Switch>
+            </Route>
+
+            <Route exact path="/">
+              <Redirect to="/projects/home/" />
+            </Route>
+            <Route path="/404/">
+              Page not found. <Link to="/">Home</Link>
+            </Route>
+            <Route path="*">
+              <Redirect to="/404/" />
+            </Route>
+          </Switch>
+        </Router>
+      </div>
+    );
   }
 }
 
