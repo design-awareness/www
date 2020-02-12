@@ -25,11 +25,10 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div className={styles.root}>
-        <Editor />
-      </div>
-    );
+    if (~window.location.hash.indexOf("dbeditor=true")) {
+      return <Editor />;
+    }
+    return <div className={styles.root}></div>;
   }
 }
 
