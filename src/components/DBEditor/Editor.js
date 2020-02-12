@@ -74,7 +74,7 @@ class Editor extends Component {
       },
       async () => {
         await this.loadType();
-        if (thenKey) this.setKey({target: {value: thenKey}})
+        if (thenKey) this.setKey({ target: { value: thenKey } });
       }
     );
   }

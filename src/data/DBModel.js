@@ -50,7 +50,9 @@ export const modelLookup = {};
 const validatePass = v => true;
 const validateType = t => v => v === null || v.constructor === t;
 const validateModel = n => v =>
-  v === null || (v instanceof GenericModel && v.constructor.name === n) || v instanceof UnloadedModel;
+  v === null ||
+  (v instanceof GenericModel && v.constructor.name === n) ||
+  v instanceof UnloadedModel;
 const validateRepeated = f => v => Array.isArray(v) && v.every(f);
 
 export default function DBModel(name, properties) {
@@ -60,7 +62,7 @@ export default function DBModel(name, properties) {
     propLookup[prop.name] = {
       ...prop,
       model: typeof prop.type === "string"
-    }
+    };
   }
 
   const Model = class extends GenericModel {
@@ -71,7 +73,7 @@ export default function DBModel(name, properties) {
     #synced = false;
 
     static get propLookup() {
-      return propLookup
+      return propLookup;
     }
 
     constructor(data) {
@@ -100,7 +102,7 @@ export default function DBModel(name, properties) {
           set(v) {
             if (this.#data[prop.name] !== v) {
               if (!validate(v)) {
-                console.log("got", v)
+                console.log("got", v);
                 throw new TypeError("Incorrect type for " + prop.name);
               }
               this.#data[prop.name] = v;
@@ -152,9 +154,9 @@ export default function DBModel(name, properties) {
       for (let { name, model, repeated } of Object.values(propLookup)) {
         if (model) {
           if (repeated) {
-            data[name] = this.#data[name].map((obj) => obj ? obj.id : null);
+            data[name] = this.#data[name].map(obj => (obj ? obj.id : null));
           } else {
-            data[name] = (this.#data[name] || {id:null}).id;
+            data[name] = (this.#data[name] || { id: null }).id;
           }
         } else {
           data[name] = this.#data[name];
@@ -237,10 +239,10 @@ export default function DBModel(name, properties) {
 }
 
 export function lookupModel(type) {
-  return modelLookup[type]
+  return modelLookup[type];
 }
 
 // async passthrough
 export function getGeneric(type, id) {
-  return modelLookup[type].getForId(id)
+  return modelLookup[type].getForId(id);
 }

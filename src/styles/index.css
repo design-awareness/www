@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-@import 'typography.css';
+@import "typography.css";
 
 body {
   font-family: var(--body-font-stack);

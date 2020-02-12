@@ -19,11 +19,11 @@ export const NAME = "CodeScheme";
 export default [
   {
     name: "name",
-    type: String,
+    type: String
   },
   {
     name: "description",
-    type: String,
+    type: String
   },
   {
     name: "codes",

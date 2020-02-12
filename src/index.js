@@ -1,16 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './styles/index.css';
-import App from './views/App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./styles/index.css";
+import App from "./views/App";
+import * as serviceWorker from "./serviceWorker";
 
 // just load models for now
-import * as model from './data/models';
+import * as model from "./data/models";
 window.M = {
   ...model
-}
+};
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

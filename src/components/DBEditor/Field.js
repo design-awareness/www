@@ -108,9 +108,9 @@ class Field extends React.Component {
         input = (
           <input
             type="datetime-local"
-            value={
-              (this.props.value ? this.props.value : new Date()).toISOString().substr(0, 16)
-            }
+            value={(this.props.value ? this.props.value : new Date())
+              .toISOString()
+              .substr(0, 16)}
             onChange={evt => {
               let d = new Date(evt.target.value + "Z");
               if (Number.isNaN(d.getTime())) {
