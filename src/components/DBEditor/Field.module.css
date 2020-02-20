@@ -45,4 +45,15 @@
   background-color: lightblue;
   border-width: 1px;
   border-style: solid;
+  font-size: 1rem;
+  width: 194px;
+  font-family: monospace;
+}
+
+.ref-unloaded {
+  background-color: pink;
+}
+
+.ref-null {
+  background-color: lightgrey;
 }

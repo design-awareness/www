@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import React from "react";
+import React, { Fragment } from "react";
 import { UnloadedModel } from "../../data/DBModel";
 import styles from "./Field.module.css";
 
@@ -38,7 +38,11 @@ class Field extends React.Component {
             {this.props.value.map((val, i) => (
               <div className={styles.groupitem} key={i}>
                 <Field
+                  goto={this.props.goto}
+                  index={i}
+                  entity={this.props.entity}
                   field={descriptor}
+                  path={this.props.path}
                   value={this.props.value[i]}
                   update={val => {
                     let newval = [...this.props.value];
@@ -53,7 +57,7 @@ class Field extends React.Component {
                     setTimeout(() => this.props.update(newval));
                   }}
                 >
-                  remove
+                  -
                 </button>
               </div>
             ))}
@@ -74,7 +78,7 @@ class Field extends React.Component {
                 this.props.update(newval);
               }}
             >
-              add
+              +
             </button>
           </div>
         );
@@ -122,18 +126,52 @@ class Field extends React.Component {
         );
       } else {
         input = (
-          <input
-            className={styles.ref}
-            type="text"
-            value={(this.props.value ? this.props.value.id : "") || ""}
-            onChange={evt => {
-              if (evt.target.value) {
-                _this.props.update(new UnloadedModel(evt.target.value));
-              } else {
-                _this.props.update(null);
+          <Fragment>
+            <input
+              className={
+                styles.ref +
+                " " +
+                (this.props.value instanceof UnloadedModel
+                  ? styles["ref-unloaded"]
+                  : "") +
+                " " +
+                (this.props.value === null ? styles["ref-null"] : "")
               }
-            }}
-          />
+              type="text"
+              value={(this.props.value ? this.props.value.id : "") || ""}
+              onChange={evt => {
+                if (evt.target.value) {
+                  _this.props.update(
+                    new UnloadedModel(
+                      evt.target.value,
+                      _this.props.entity,
+                      _this.props.path,
+                      _this.props.index
+                    )
+                  );
+                } else {
+                  _this.props.update(null);
+                }
+              }}
+            />
+            {_this.props.value && (
+              <button
+                onClick={async evt => {
+                  if (_this.props.value instanceof UnloadedModel) {
+                    let resolved = await _this.props.value.resolve();
+                    _this.props.update(resolved);
+                  } else if (_this.props.value !== null) {
+                    _this.props.goto(
+                      _this.props.value.constructor.name,
+                      _this.props.value.id
+                    );
+                  }
+                }}
+              >
+                {_this.props.value instanceof UnloadedModel ? "res" : "go"}
+              </button>
+            )}
+          </Fragment>
         );
       }
     }

@@ -61,6 +61,8 @@ class Editor extends Component {
     this.updateField = this.updateField.bind(this);
     this.deleteSelected = this.deleteSelected.bind(this);
     this.save = this.save.bind(this);
+    this.refresh = this.refresh.bind(this);
+    this.goto = this.goto.bind(this);
 
     this.loadType();
   }
@@ -118,8 +120,6 @@ class Editor extends Component {
     };
   }
 
-  saveField(field) {}
-
   async loadKey() {
     let keySelection = this.state.keySelection;
     let entity;
@@ -146,6 +146,17 @@ class Editor extends Component {
     this.setType({ target: { value: this.state.typeSelection } }, id);
   }
 
+  async refresh() {
+    await this.state.entityWrapper[0].refresh();
+    this.setState({
+      entityWrapper: [this.state.entityWrapper[0]]
+    });
+  }
+
+  goto(type, id) {
+    this.setType({ target: { value: type } }, id);
+  }
+
   render() {
     return (
       <div className={styles.root}>
@@ -170,8 +181,9 @@ class Editor extends Component {
             </optgroup>
           </select>
         )}
+        {this.state.keySelection && <button onClick={this.refresh}>↻</button>}
         {this.state.keySelection && (
-          <button onClick={this.deleteSelected}>Delete</button>
+          <button onClick={this.deleteSelected}>-</button>
         )}
         {this.state.entityWrapper && (
           <div className={styles.editor}>
@@ -184,14 +196,22 @@ class Editor extends Component {
               (field, i) =>
                 field && (
                   <Field
+                    goto={this.goto}
                     key={i}
+                    entity={this.state.entityWrapper[0]}
                     value={this.state.entityWrapper[0][field.name]}
                     field={field}
+                    path={field.name}
                     update={this.updateField(field.name)}
                   />
                 )
             )}
-            <button onClick={this.save}>Save</button>
+            <button
+              onClick={this.save}
+              disabled={!this.state.entityWrapper[0].dirty}
+            >
+              Save
+            </button>
           </div>
         )}
       </div>
