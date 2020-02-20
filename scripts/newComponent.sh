@@ -22,10 +22,10 @@ echo "// $1.js
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import React from 'react';
+import React, { Component } from 'react';
 import styles from './$1.module.css';
 
-class $1 extends React.Component {
+class $1 extends Component {
   constructor(props) {
     super(props);
     this.state = {};
