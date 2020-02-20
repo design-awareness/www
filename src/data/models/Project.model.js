@@ -42,6 +42,10 @@ export default [
     type: "CodeScheme"
   },
   {
+    name: "colorScheme",
+    type: String
+  },
+  {
     name: "notes",
     type: "Note",
     repeated: true

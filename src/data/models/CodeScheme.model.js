@@ -39,10 +39,5 @@ export default [
     name: "descriptions",
     type: String,
     repeated: true
-  },
-  {
-    name: "color",
-    type: String,
-    repeated: true
   }
 ];
