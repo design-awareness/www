@@ -17,5 +17,14 @@
  */
 
 .root {
+  display: inline-block;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 16px -4px rgba(0, 0, 0, 0.5);
+  margin: 1rem;
+  padding: 1rem;
+}
 
+.root h2 {
+  margin-top: 0;
 }

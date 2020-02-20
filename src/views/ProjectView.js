@@ -45,6 +45,7 @@ class ProjectView extends Component {
   }
 
   delete = async () => {
+    if (!window.confirm("are you sure")) return;
     await this.state.project.remove();
     this.setState({
       exit: true
