@@ -65,12 +65,16 @@ export default function DBModel(name, properties) {
     };
   }
 
+  const entityLookup = new Map();
+
   const Model = class extends GenericModel {
     #data = {};
     #id = null;
     #dirty = false;
     #saved = false;
     #synced = false;
+
+    #subscriptions = [];
 
     static get propLookup() {
       return propLookup;
@@ -105,6 +109,7 @@ export default function DBModel(name, properties) {
                 console.log("got", v);
                 throw new TypeError("Incorrect type for " + prop.name);
               }
+              this.#subscriptions.forEach(fn => fn(prop.name, v));
               this.#data[prop.name] = v;
               this.#dirty = true;
             }
@@ -120,6 +125,19 @@ export default function DBModel(name, properties) {
       }
     }
 
+    subscribe(fn) {
+      this.#subscriptions.push(fn);
+    }
+
+    unsubscribe(fn) {
+      const index = this.#subscriptions.indexOf(fn);
+      if (index > -1) {
+        this.#subscriptions.splice(index, 1);
+        return true;
+      }
+      return false;
+    }
+
     merge(prop, val) {
       let newVal = { ...this.#data[prop], ...val };
       this[prop] = newVal; // apply the usual validation
@@ -127,6 +145,14 @@ export default function DBModel(name, properties) {
 
     get id() {
       return this.#id;
+    }
+
+    get saved() {
+      return this.#saved;
+    }
+
+    get dirty() {
+      return this.#dirty;
     }
 
     valueOf() {
@@ -143,6 +169,7 @@ export default function DBModel(name, properties) {
           await add(name, this.pack(id));
           this.#saved = true;
           this.#id = id;
+          entityLookup.set(id, this);
         }
         this.#dirty = false;
       }
@@ -193,7 +220,7 @@ export default function DBModel(name, properties) {
       let val = await modelLookup[propLookup[path].type].getForId(ref.id);
       // if (recursive) await val.resolveAll();
       if (index !== undefined) {
-        this[path][ref] = val;
+        this[path][index] = val;
       } else {
         this[path] = val;
       }
@@ -218,16 +245,35 @@ export default function DBModel(name, properties) {
 
     async remove() {
       await remove(name, this.#id);
+      entityLookup.delete(this.#id);
       this.#id = null;
       this.#saved = false;
     }
 
+    async refresh() {
+      const data = await get(name, this.#id);
+      if (!data) return false;
+      this.#data = this.unpack(data);
+      this.#saved = true;
+    }
+
     static async getForId(id) {
+      if (entityLookup.has(id)) {
+        return entityLookup.get(id);
+      }
       const data = await get(name, id);
       if (!data) return null;
-      // resolve using the real constructor
-      // for the subtype
-      return new this.__constructor(data);
+
+      // check once again, to ensure we don't get two different
+      // models if there were two calls very close together
+      if (entityLookup.has(id)) {
+        return entityLookup.get(id);
+      }
+
+      // otherwise, resolve using the real constructor for the subtype
+      const newEntity = new this.__constructor(data);
+      entityLookup.set(id, newEntity);
+      return newEntity;
     }
   };
 
