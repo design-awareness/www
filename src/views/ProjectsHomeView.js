@@ -47,16 +47,18 @@ class ProjectsHomeView extends Component {
     return (
       <div className={styles.root}>
         <h1>Projects home view</h1>
-        <ul>
-          <li>
-            <Link to="/projects/new">Create new</Link>
-          </li>
-          {this.state.projects.map(id => (
-            <li key={id}>
-              <RichProjectTile id={id} />
+        <div className={styles.projects}>
+          <ul>
+            <li>
+              <RichProjectTile add />
             </li>
-          ))}
-        </ul>
+            {this.state.projects.map(id => (
+              <li key={id}>
+                <RichProjectTile id={id} />
+              </li>
+            ))}
+          </ul>
+        </div>
         <p className={styles.small}>
           <Link to="/dev/dbeditor">DBEditor</Link>
         </p>

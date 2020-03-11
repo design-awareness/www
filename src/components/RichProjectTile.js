@@ -30,17 +30,25 @@ class RichProjectTile extends Component {
   }
 
   async load() {
+    if (this.props.add) return;
     const project = await Project.getForId(this.props.id);
     this.setState({ project, loaded: true });
   }
 
   render() {
+    if (this.props.add) {
+      return (
+        <Link to="/projects/new" className={styles.root + " " + styles.new}>
+          New
+        </Link>
+      );
+    }
+
     return this.state.loaded ? (
-      <div className={styles.root}>
+      <Link to={"/projects/" + this.props.id + "/"} className={styles.root}>
         <h2>{this.state.project.name}</h2>
         <p>{this.state.project.description}</p>
-        <Link to={"/projects/" + this.props.id + "/"}>Open</Link>
-      </div>
+      </Link>
     ) : (
       <em>loading project {this.props.id}</em>
     );
