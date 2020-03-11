@@ -20,4 +20,5 @@
 
 body {
   font-family: var(--body-font-stack);
+  background-color: #f8f8f8;
 }
