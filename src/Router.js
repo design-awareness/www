@@ -23,6 +23,7 @@ import {
   Link
 } from "react-router-dom";
 import Editor from "./components/DBEditor/Editor";
+import DevCodeThemesView from "./views/DevCodeThemesView";
 
 import ProjectsHomeView from "./views/ProjectsHomeView";
 import AllProjectsView from "./views/AllProjectsView";
@@ -43,6 +44,9 @@ class App extends Component {
         <Switch>
           <Route exact path="/dev/dbeditor/">
             <Editor />
+          </Route>
+          <Route exact path="/dev/codethemes">
+            <DevCodeThemesView />
           </Route>
 
           <Route exact path="/home/">
