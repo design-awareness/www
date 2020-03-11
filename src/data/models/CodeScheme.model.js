@@ -41,7 +41,7 @@ export default [
     repeated: true
   },
   {
-    name: "color",
+    name: "colors",
     type: String,
     repeated: true
   }
