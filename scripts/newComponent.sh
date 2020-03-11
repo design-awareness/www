@@ -22,22 +22,15 @@ echo "// $1.js
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import React, { Component } from 'react';
+import React from 'react';
 import styles from './$1.module.css';
 
-class $1 extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    return (
-      <div className={styles.root}>
-        Hello, $1
-      </div>
-    )
-  }
+function $1(props) {
+  return (
+    <div className={styles.root}>
+      Hello, $1
+    </div>
+  )
 }
 
 export default $1" > src/components/$1.js
