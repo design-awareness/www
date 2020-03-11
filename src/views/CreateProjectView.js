@@ -14,71 +14,57 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import styles from "./CreateProjectView.module.css";
 import { Project } from "../data/models";
 
-class CreateProjectView extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "",
-      desc: "",
-      working: false
-    };
-  }
+import DesignActivitySetChooser from "../components/DesignActivitySetChooser";
 
-  changeName = evt => {
-    this.setState({ name: evt.target.value });
-  };
+function CreateProjectView(props) {
+  const [name, setName] = useState("");
+  const [desc, setDesc] = useState("");
+  const [working, setWorking] = useState(false);
+  const [activitySet, setActivitySet] = useState(null);
+  const [newProjectId, setNewProjectId] = useState(null);
 
-  changeDesc = evt => {
-    this.setState({ desc: evt.target.value });
-  };
-
-  save = async () => {
-    this.setState({
-      working: true
-    });
+  const save = async () => {
+    setWorking(true);
     const proj = new Project();
-    proj.name = this.state.name;
-    proj.description = this.state.desc;
+    proj.name = name;
+    proj.description = desc;
+    proj.codeScheme = activitySet;
     proj.created = new Date();
     proj.active = true;
     await proj.save();
-    this.setState({
-      newProjectId: proj.id
-    });
-    // this.props.setGlobalState({
-    //   projectListDirty: true
-    // });
+    setNewProjectId(proj.id);
   };
 
-  render() {
-    if (this.state.newProjectId) {
-      return <Redirect to={"/projects/" + this.state.newProjectId + "/"} />;
-    }
-    return (
-      <div className={styles.root}>
-        <Link to="/home/">Back</Link>
-        <h1>Create project</h1>
-        <label>
-          Name: <input onChange={this.changeName} value={this.state.name} />
-        </label>
-        <label>
-          Description:{" "}
-          <textarea onChange={this.changeDesc} value={this.state.desc} />
-        </label>
-        <button
-          disabled={!this.state.name || this.state.working}
-          onClick={this.save}
-        >
-          {this.state.working ? "Creating…" : "Create"}
-        </button>
-      </div>
-    );
+  if (newProjectId) {
+    return <Redirect to={"/projects/" + newProjectId + "/"} />;
   }
+
+  return (
+    <div className={styles.root}>
+      <Link to="/home/">Back</Link>
+      <h1>Create project</h1>
+      <label>
+        Name: <input onChange={evt => setName(evt.target.value)} value={name} />
+      </label>
+      <label>
+        Description:{" "}
+        <textarea onChange={evt => setDesc(evt.target.value)} value={desc} />
+      </label>
+
+      <h2>Choose design activity set</h2>
+
+      <DesignActivitySetChooser value={activitySet} setValue={setActivitySet} />
+
+      <button disabled={!name || !activitySet || working} onClick={save}>
+        {working ? "Creating…" : "Create"}
+      </button>
+    </div>
+  );
 }
 
 export default CreateProjectView;
