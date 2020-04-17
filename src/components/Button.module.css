@@ -1,0 +1,102 @@
+/*
+ * Button.module.css
+ * Copyright (C) 2020
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+.root {
+  appearance: none;
+  font-size: 1.125rem;
+  line-height: 1.25rem;
+  padding: calc(0.625rem - var(--button-border-size))
+    calc(2rem - var(--button-border-size));
+  border-radius: 3rem;
+  font-weight: 300;
+  font-family: var(--body-font-stack);
+  box-sizing: border-box;
+  border: var(--button-border-size) solid transparent;
+  background-color: transparent;
+  transition: background-color var(--transition-time-swift) ease,
+    border-color var(--transition-time-swift) ease,
+    color var(--transition-time-swift) ease,
+    box-shadow var(--transition-time-focus-ring) ease;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0;
+}
+
+.small {
+  font-size: 1rem;
+  line-height: 1rem;
+  padding: calc(0.5rem - var(--button-border-size))
+    calc(1rem - var(--button-border-size));
+}
+
+.color_brand {
+  --primary-color: var(--brand-color);
+  --hover-color: var(--brand-color); /* for hover - needs a color */
+  --secondary-color: #f5f5f5;
+  --primary-text-color: white;
+  --primary-text-hover-color: white;
+  --secondary-text-color: black;
+  --secondary-text-hover-color: black;
+}
+
+/* maybe unused for now, need proper colors */
+.color_danger {
+  --primary-color: darkred;
+  --hover-color: darkred;
+  --secondary-color: white;
+  --primary-text-color: white;
+  --primary-text-hover-color: white;
+  --secondary-text-color: darkred;
+  --secondary-text-hover-color: darkred;
+}
+
+.root:hover {
+  --primary-color: var(--hover-color);
+  --primary-text-color: var(--primary-text-hover-color);
+  --secondary-text-color: var(--secondary-text-hover-color);
+}
+
+.type_primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--primary-text-color);
+}
+
+.type_secondary {
+  border-color: var(--primary-color);
+  background-color: var(--secondary-color);
+  color: var(--secondary-text-color);
+}
+
+.type_text {
+  color: var(--primary-color);
+}
+
+/* .root:hover {
+  background-color: var(--primary-color);
+  border-color: var(--secondary-color);
+  color: white;
+} */
+
+.root[disabled] {
+  opacity: 0.5;
+}
+
+.demo .root {
+  margin-right: 1rem;
+}

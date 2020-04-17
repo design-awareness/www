@@ -30,6 +30,8 @@ import AllProjectsView from "./views/AllProjectsView";
 import CreateProjectView from "./views/CreateProjectView";
 import ProjectView from "./views/ProjectView";
 
+import ComponentLibraryView from "./views/ComponentLibraryView";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -42,10 +44,13 @@ class App extends Component {
     return (
       <Router hashType="hashbang">
         <Switch>
+          <Route path="/dev/component-library/">
+            <ComponentLibraryView />
+          </Route>
           <Route exact path="/dev/dbeditor/">
             <Editor />
           </Route>
-          <Route exact path="/dev/codethemes">
+          <Route exact path="/dev/codethemes/">
             <DevCodeThemesView />
           </Route>
 
@@ -63,7 +68,7 @@ class App extends Component {
             />
           </Route>
 
-          <Route exact path="/projects/new/">
+          <Route path="/projects/new/">
             <CreateProjectView
               globalState={this.state}
               setGlobalState={this.setGlobalState}
