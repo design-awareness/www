@@ -1,5 +1,5 @@
 /*
- * index.css
+ * layout.css
  * Copyright (C) 2020
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,16 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-@import "color.css";
-@import "typography.css";
-@import "layout.css";
-@import "timings.css";
-@import "focus-ring.css";
-
-body {
-  font-family: var(--body-font-stack);
-  background-color: #f8f8f8;
-  --local-background: #f8f8f8;
-  margin: 0;
+:root {
+  --global-margin: 1rem;
+  --button-border-size: 1px;
 }
-
