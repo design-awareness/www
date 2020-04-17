@@ -1,5 +1,5 @@
 /*
- * DesignActivitySetChooser.module.css
+ * DesignActivitySetBuilder.module.css
  * Copyright (C) 2020
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,38 +17,16 @@
  */
 
 .root {
+  padding: var(--global-margin);
 }
 
-.activities {
-  list-style-type: none;
-  padding: 0;
-  background: white;
+.root label {
+  display: block;
+}
+
+.root input,
+.root textarea {
+  width: calc(100% - 1rem);
+  margin: 0.5rem;
   border: 1px solid grey;
-  margin: 0.5rem;
-  background: white;
-}
-
-.activity {
-  border: 0px solid grey;
-  border-bottom-width: 1px;
-}
-
-.activity:last-child {
-  border-bottom-width: 0;
-}
-
-.activity > button {
-  width: 100%;
-  background: none;
-  border: 0;
-  text-align: left;
-}
-
-.actions {
-  display: flex;
-}
-
-.actions button {
-  flex-basis: 50%;
-  margin: 0.5rem;
 }

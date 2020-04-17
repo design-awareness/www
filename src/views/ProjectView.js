@@ -19,6 +19,8 @@ import { Link, Redirect } from "react-router-dom";
 import styles from "./ProjectView.module.css";
 import { Project } from "../data/models";
 
+import Button from "../components/Button";
+
 class ProjectView extends Component {
   constructor(props) {
     super(props);
@@ -68,7 +70,7 @@ class ProjectView extends Component {
           {`Created ${this.state.project.created.toLocaleDateString()} ` +
             this.state.project.created.toLocaleTimeString()}
         </p>
-        <button onClick={this.delete}>delete</button>
+        <Button onClick={this.delete}>delete</Button>
       </div>
     ) : (
       <div className={styles.root}>

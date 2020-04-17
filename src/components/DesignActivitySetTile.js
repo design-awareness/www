@@ -16,6 +16,7 @@
 
 import React from "react";
 import styles from "./DesignActivitySetTile.module.css";
+import ActivityCodeBadge from "./ActivityCodeBadge";
 
 function DesignActivitySetTile(props) {
   if (props.empty) {
@@ -32,13 +33,11 @@ function DesignActivitySetTile(props) {
       <p>{props.activitySet.description}</p>
       <ul className={styles.symbols}>
         {props.activitySet.shortCodes.map((code, i) => (
-          <li
+          <ActivityCodeBadge
             key={code}
-            className={styles.symbol}
-            style={{ backgroundColor: "#" + props.activitySet.colors[i] }}
-          >
-            {code}
-          </li>
+            label={code}
+            color={props.activitySet.colors[i]}
+          />
         ))}
       </ul>
     </div>

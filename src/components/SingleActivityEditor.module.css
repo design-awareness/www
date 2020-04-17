@@ -1,5 +1,5 @@
 /*
- * DesignActivitySetChooser.module.css
+ * SingleActivityEditor.module.css
  * Copyright (C) 2020
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,36 +19,7 @@
 .root {
 }
 
-.activities {
-  list-style-type: none;
-  padding: 0;
-  background: white;
-  border: 1px solid grey;
-  margin: 0.5rem;
-  background: white;
-}
-
-.activity {
-  border: 0px solid grey;
-  border-bottom-width: 1px;
-}
-
-.activity:last-child {
-  border-bottom-width: 0;
-}
-
-.activity > button {
-  width: 100%;
-  background: none;
-  border: 0;
-  text-align: left;
-}
-
-.actions {
-  display: flex;
-}
-
-.actions button {
-  flex-basis: 50%;
-  margin: 0.5rem;
+.swatch {
+  width: 1.5rem;
+  height: 1.5rem;
 }

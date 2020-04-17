@@ -26,7 +26,7 @@ class ProjectsHomeView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      projects: []
+      projects: [],
     };
     this.loadProjects();
   }
@@ -52,7 +52,7 @@ class ProjectsHomeView extends Component {
             <li>
               <RichProjectTile add />
             </li>
-            {this.state.projects.map(id => (
+            {this.state.projects.map((id) => (
               <li key={id}>
                 <RichProjectTile id={id} />
               </li>
@@ -60,7 +60,9 @@ class ProjectsHomeView extends Component {
           </ul>
         </div>
         <p className={styles.small}>
-          <Link to="/dev/dbeditor">DBEditor</Link>
+          <Link to="/dev/dbeditor">DBEditor</Link> 
+          <Link to="/dev/codethemes">Code themes</Link> 
+          <Link to="/dev/component-library/">Component Library</Link>
         </p>
       </div>
     );

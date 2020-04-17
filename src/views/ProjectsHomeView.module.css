@@ -17,6 +17,7 @@
  */
 
 .root {
+  padding: var(--global-margin);
 }
 
 .small {
@@ -26,16 +27,18 @@
 
 .projects {
   overflow-x: auto;
+  margin: 0 calc(-1 * var(--global-margin));
 }
 
 .projects ul {
   display: flex;
   flex-direction: row;
-  padding: 0;
+  padding: 0 0 0 var(--global-margin);
   list-style-type: none;
   justify-content: flex-start;
+  width: fit-content;
 }
 
 .projects li {
-  margin: 0;
+  margin-right: 1rem;
 }

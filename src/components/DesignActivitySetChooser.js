@@ -23,6 +23,8 @@ import presetActivities from "../presets/activities";
 import { getAll } from "../data/database";
 import { CodeScheme } from "../data/models";
 
+import Button from "./Button";
+
 function DesignActivitySetChooser(props) {
   const [loading, setLoading] = useState(false);
   const [ready, setReady] = useState(false);
@@ -58,7 +60,7 @@ function DesignActivitySetChooser(props) {
     return (
       <div className={styles.root}>
         <DesignActivitySetTile activitySet={props.value} large={true} />
-        <button onClick={() => props.setValue(null)}>Change selection</button>
+        <Button onClick={() => props.setValue(null)}>Change selection</Button>
       </div>
     );
   }
@@ -66,7 +68,7 @@ function DesignActivitySetChooser(props) {
   if (!ready) {
     return (
       <div className={styles.root}>
-        <p>Loading design activity sets…</p>
+        <p>Loading…</p>
       </div>
     );
   }
@@ -80,17 +82,24 @@ function DesignActivitySetChooser(props) {
             {activities.map(activity => (
               <li key={activity.id} className={styles.activity}>
                 <button onClick={() => setPreselection(activity.id)}>
-                  <DesignActivitySetTile
-                    activitySet={activity}
-                    large={preselection === activity.id}
-                  />
+                  <DesignActivitySetTile activitySet={activity} />
                 </button>
                 {preselection === activity.id && (
                   <div className={styles.actions}>
-                    <button onClick={() => props.setValue(activity)}>
+                    <Button
+                      small
+                      type="primary"
+                      onClick={() => props.setValue(activity)}
+                    >
                       Use
-                    </button>
-                    <button>Customize</button>
+                    </Button>
+                    <Button
+                      small
+                      type="secondary"
+                      onClick={() => props.createFromTemplate(activity)}
+                    >
+                      Customize
+                    </Button>
                   </div>
                 )}
               </li>
@@ -102,16 +111,13 @@ function DesignActivitySetChooser(props) {
       <ul className={styles.activities}>
         {presetActivities.map((activity, i) => (
           <li key={i} className={styles.activity}>
-            <button onClick={() => setPreselection(i)}>
-              <DesignActivitySetTile
-                activitySet={activity}
-                large={preselection === i}
-              />
+            <button onClick={() => props.createFromTemplate(activity)}>
+              <DesignActivitySetTile activitySet={activity} />
             </button>
           </li>
         ))}
         <li className={styles.activity}>
-          <button onClick={() => null}>
+          <button onClick={() => props.createFromTemplate({})}>
             <DesignActivitySetTile empty />
           </button>
         </li>

@@ -17,5 +17,5 @@
  */
 
 .root {
-
+  padding: var(--global-margin);
 }

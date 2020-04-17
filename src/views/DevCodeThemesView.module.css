@@ -16,6 +16,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+.root {
+  padding: var(--global-margin);
+}
+
 .root h2 {
   margin-top: 2rem;
   margin-bottom: 0.5rem;
