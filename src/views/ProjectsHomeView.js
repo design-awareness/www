@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 import styles from "./ProjectsHomeView.module.css";
 
 import RichProjectTile from "../components/RichProjectTile";
+import { PageHeading } from "../components/HierarchicalTextBlocks";
 
 import { getAll } from "../data/database";
 
@@ -46,7 +47,7 @@ class ProjectsHomeView extends Component {
   render() {
     return (
       <div className={styles.root}>
-        <h1>Projects home view</h1>
+        <PageHeading>Projects home view</PageHeading>
         <div className={styles.projects}>
           <ul>
             <li>

@@ -19,6 +19,7 @@ import { Redirect, useHistory, useLocation } from "react-router-dom";
 import styles from "./CreateProjectView.module.css";
 import { Project } from "../data/models";
 
+import { PageHeading, SectionHead } from "../components/HierarchicalTextBlocks";
 import DesignActivitySetChooser from "../components/DesignActivitySetChooser";
 import DesignActivitySetBuilder from "./DesignActivitySetBuilder";
 import Button from "../components/Button";
@@ -92,7 +93,7 @@ function CreateProjectView(props) {
       <Button linkTo="/home/" small>
         Back
       </Button>
-      <h1>Create project</h1>
+      <PageHeading>Create project</PageHeading>
       <label>
         Name:{" "}
         <input onChange={(evt) => setName(evt.target.value)} value={name} />
@@ -102,7 +103,7 @@ function CreateProjectView(props) {
         <textarea onChange={(evt) => setDesc(evt.target.value)} value={desc} />
       </label>
 
-      <h2>Choose design activity set</h2>
+      <SectionHead>Choose design activity set</SectionHead>
 
       <DesignActivitySetChooser
         value={activitySet}

@@ -1,0 +1,48 @@
+/*
+ * HierarchicalTextBlocks.module.css
+ * Copyright (C) 2020
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+/* These probably should be define more generally in typography.css */
+.pageHead {
+  font-size: 1.375rem;
+  line-height: 1.75rem;
+  margin: 0.75rem 0;
+  font-weight: 400;
+}
+
+.pageSubhead {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 0;
+  margin-bottom: 2rem;
+}
+
+.sectionHead {
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  line-height: 2;
+  margin: 1.5rem 1rem 0.75rem 1rem;
+}
+
+.dummy {
+  height: 4rem;
+  background: #eee;
+  border: 1px dashed #ccc;
+}

@@ -21,10 +21,14 @@ import styles from "./ComponentLibraryView.module.css";
 import { ActivityCodeBadgeTest } from "../components/ActivityCodeBadge";
 import { ButtonTest } from "../components/Button";
 import { ButtonGroupTest } from "../components/ButtonGroup";
+import { HierarchicalTextBlocksTest } from "../components/HierarchicalTextBlocks";
 
-const components = [ActivityCodeBadgeTest, ButtonTest, ButtonGroupTest].sort(
-  (l, r) => (l.slug > r.slug) * 2 - 1
-);
+const components = [
+  ActivityCodeBadgeTest,
+  ButtonTest,
+  ButtonGroupTest,
+  HierarchicalTextBlocksTest,
+].sort((l, r) => (l.slug > r.slug) * 2 - 1);
 
 function ComponentLibraryView(props) {
   return (
